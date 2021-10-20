@@ -1,14 +1,17 @@
-import * as THREE from 'https://cdn.skypack.dev/three@0.132.2/build/three.module.js';
-import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/loaders/GLTFLoader.js';
-import { DRACOLoader } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/loaders/DRACOLoader.js';
-import { EXRLoader } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/loaders/EXRLoader.js';
-import { EffectComposer } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/postprocessing/EffectComposer.js';
-import { SSRPass } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/postprocessing/SSRPass.js';
-import { FXAAShader } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/shaders/FXAAShader.js';
-import { ShaderPass } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/postprocessing/ShaderPass.js';
-import { FlyControls } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/FlyControls.js';
-import Stats from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/libs/stats.module.js';
-import * as TWEEN from 'https://cdn.skypack.dev/tween.js@16.6.0/src/Tween.js';
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
+import { EXRLoader } from 'three/examples/jsm/loaders/EXRLoader.js';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import { SSRPass } from 'three/examples/jsm/postprocessing/SSRPass.js';
+import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader.js';
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
+
+import '../scss/main.scss'
+
+//import { FlyControls } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/FlyControls.js';
+//import Stats from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/libs/stats.module.js';
+//import * as TWEEN from 'https://cdn.skypack.dev/tween.js@16.6.0/src/Tween.js';
 
 let clock, scene, camera, renderer, controls, mixer, composer, ssr, fxaa, stats;
 const selects = [];
@@ -73,7 +76,7 @@ function init()
     dracoLoader.setDecoderConfig({ type: 'js' });
     dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.4.1/');
 
-    new EXRLoader().load('./tex/background.exr', (texture) =>
+    new EXRLoader().load('../img/background.exr', (texture) =>
     {
         texture.mapping = THREE.EquirectangularReflectionMapping;
 
@@ -83,7 +86,7 @@ function init()
 
         const gltfLoader = new GLTFLoader(loadingManager);
         gltfLoader.setDRACOLoader(dracoLoader);
-        gltfLoader.load('./mdl/bg_cubes.glb', (gltf) =>
+        gltfLoader.load('../mdl/bg_cubes.glb', (gltf) =>
         {
             scene.add(gltf.scene);
 
@@ -124,7 +127,7 @@ function init()
             currPosition = (((currPosition - 1) % 3) + 3) % 3;
         }
         isTweaning = true;
-        tweenCamera(camera, positions[currPosition], rotations[currPosition], 1500);
+        //tweenCamera(camera, positions[currPosition], rotations[currPosition], 1500);
     });
 
     window.addEventListener('resize', onWindowResize);
@@ -138,7 +141,7 @@ function update()
     if (mixer) mixer.update(delta);
     //controls.update(delta);
     //stats.update();
-    TWEEN.update();
+    //TWEEN.update();
 
     composer.render();
 }
@@ -152,7 +155,7 @@ function onWindowResize()
     composer.setSize(window.innerWidth, window.innerHeight);
 }
 
-function tweenCamera(camera, position, rotation, duration)
+/* function tweenCamera(camera, position, rotation, duration)
 {
     new TWEEN.Tween(camera.position).to({
         x: position[0],
@@ -168,5 +171,5 @@ function tweenCamera(camera, position, rotation, duration)
         y: rotation[1],
         z: rotation[2]
     }, duration).easing(TWEEN.Easing.Quadratic.InOut).start();
-}
+} */
 
