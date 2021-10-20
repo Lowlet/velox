@@ -10,10 +10,9 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].[contenthash].js',
-        assetModuleFilename: 'assets/[name].[contenthash][ext]',
         clean: true
     },
-    devtool: isDev ? 'eval-source-map' : 'hidden-source-map',
+    devtool: isDev ? 'eval-source-map' : false,
     devServer: {
         static: {
             directory: path.resolve(__dirname, 'dist'),
@@ -36,27 +35,25 @@ module.exports = {
         rules: [
             {
                 test: /\.html$/i,
-                loader: 'html-loader',
-                options: {
-                    sources: {
-                        list: [
-                            '...',
-                            {
-                                tag: 'img',
-                                attribute: 'data-src',
-                                type: 'src',
-                            }
-                        ]
-                    }
-                }
+                loader: 'html-loader'
             },
             {
                 test: /\.(s(a|c)ss)$/,
                 use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
             },
             {
-                test: /\.(jpe?g|png|gif|svg|webp|ico|exr|glb|gltf)$/,
-                type: 'asset/resource'
+                test: /\.(jpe?g|png|svg|exr)$/,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'img/[hash][ext]'
+                }
+            },
+            {
+                test: /\.(glb|gltf)$/,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'mdl/[hash][ext]'
+                }
             }
         ]
     }
