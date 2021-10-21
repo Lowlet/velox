@@ -9,11 +9,14 @@ import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
 
 import '../scss/main.scss'
 
+import mdl_bg_cubes from '../mdl/bg_cubes.glb';
+import img_background from '../img/background.exr';
+
 //import { FlyControls } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/FlyControls.js';
 //import Stats from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/libs/stats.module.js';
 //import * as TWEEN from 'https://cdn.skypack.dev/tween.js@16.6.0/src/Tween.js';
 
-let clock, scene, camera, renderer, controls, mixer, composer, ssr, fxaa, stats;
+let canvas, clock, scene, camera, renderer, controls, mixer, composer, ssr, fxaa, stats;
 const selects = [];
 const positions = [
     [3.2, 11.5, 10.6],
@@ -33,6 +36,8 @@ update();
 
 function init()
 {
+    canvas = document.getElementById('canvas')
+
     clock = new THREE.Clock()
 
     scene = new THREE.Scene();
@@ -41,13 +46,12 @@ function init()
     camera.position.set(3.2, 11.5, 10.6);
     camera.rotation.set(-1.5, 0, 1);
 
-    renderer = new THREE.WebGLRenderer();
+    renderer = new THREE.WebGLRenderer({ canvas });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.outputEncoding = THREE.sRGBEncoding;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 0.5;
     renderer.physicallyCorrectLights = true;
-    document.body.appendChild(renderer.domElement);
 
     //stats = new Stats();
     //document.body.appendChild(stats.dom);
@@ -76,7 +80,7 @@ function init()
     dracoLoader.setDecoderConfig({ type: 'js' });
     dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.4.1/');
 
-    new EXRLoader().load('../img/background.exr', (texture) =>
+    new EXRLoader().load(img_background, (texture) =>
     {
         texture.mapping = THREE.EquirectangularReflectionMapping;
 
@@ -86,7 +90,7 @@ function init()
 
         const gltfLoader = new GLTFLoader(loadingManager);
         gltfLoader.setDRACOLoader(dracoLoader);
-        gltfLoader.load('../mdl/bg_cubes.glb', (gltf) =>
+        gltfLoader.load(mdl_bg_cubes, (gltf) =>
         {
             scene.add(gltf.scene);
 
@@ -143,7 +147,8 @@ function update()
     //stats.update();
     //TWEEN.update();
 
-    composer.render();
+    //composer.render();
+    renderer.render( scene, camera );
 }
 
 function onWindowResize()

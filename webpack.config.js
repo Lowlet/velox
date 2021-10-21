@@ -14,15 +14,13 @@ module.exports = {
     },
     devtool: isDev ? 'eval-source-map' : false,
     devServer: {
-        static: {
-            directory: path.resolve(__dirname, 'dist'),
-          },
-        hot: isDev
+        static: path.resolve(__dirname, 'dist'),
+        open: true,
+        hot: true
     },
     plugins: [
         new HtmlWebpackPlugin({
             template: './index.html',
-            favicon: "./img/favicon.png",
             minify: {
                 collapseWhitespace: !isDev
             }
@@ -39,21 +37,15 @@ module.exports = {
             },
             {
                 test: /\.(s(a|c)ss)$/,
-                use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
+                use: [isDev ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
             },
             {
                 test: /\.(jpe?g|png|svg|exr)$/,
                 type: 'asset/resource',
-                generator: {
-                    filename: 'img/[hash][ext]'
-                }
             },
             {
                 test: /\.(glb|gltf)$/,
                 type: 'asset/resource',
-                generator: {
-                    filename: 'mdl/[hash][ext]'
-                }
             }
         ]
     }
