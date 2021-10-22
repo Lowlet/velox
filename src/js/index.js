@@ -7,16 +7,15 @@ import { SSRPass } from 'three/examples/jsm/postprocessing/SSRPass.js';
 import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader.js';
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
 
+import * as $ from 'jquery'
+import { gsap } from 'gsap'
+
 import '../scss/main.scss'
 
 import mdl_bg_cubes from '../mdl/bg_cubes.glb';
 import img_background from '../img/background.exr';
 
-//import { FlyControls } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/FlyControls.js';
-//import Stats from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/libs/stats.module.js';
-//import * as TWEEN from 'https://cdn.skypack.dev/tween.js@16.6.0/src/Tween.js';
-
-let canvas, clock, scene, camera, renderer, controls, mixer, composer, ssr, fxaa, stats;
+let canvas, clock, scene, camera, renderer, mixer, composer, ssr, fxaa, stats;
 const selects = [];
 const positions = [
     [3.2, 11.5, 10.6],
@@ -28,17 +27,18 @@ const rotations = [
     [-1, -0.7, -0.8],
     [-2.6, -0.4, -2.9]
 ];
-let currPosition = 0;
-let isTweaning;
+let currentPosition = 0;
+let benefitsShown;
+let infoShown;
 
 init();
 update();
 
 function init()
 {
-    canvas = document.getElementById('canvas')
+    canvas = document.getElementById('canvas');
 
-    clock = new THREE.Clock()
+    clock = new THREE.Clock();
 
     scene = new THREE.Scene();
 
@@ -46,15 +46,12 @@ function init()
     camera.position.set(3.2, 11.5, 10.6);
     camera.rotation.set(-1.5, 0, 1);
 
-    renderer = new THREE.WebGLRenderer({ canvas });
+    renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.outputEncoding = THREE.sRGBEncoding;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 0.5;
+    renderer.toneMappingExposure = 0.45;
     renderer.physicallyCorrectLights = true;
-
-    //stats = new Stats();
-    //document.body.appendChild(stats.dom);
 
     //Screen Space Reflections
     ssr = new SSRPass({ renderer, scene, camera, width: innerWidth, height: innerHeight, encoding: THREE.sRGBEncoding, groundReflector: false, selects: selects });
@@ -86,7 +83,7 @@ function init()
 
         scene.background = new THREE.Color(0x3d9b97);
         scene.environment = texture;
-        scene.fog = new THREE.FogExp2(0x3d9b97, 0.05);
+        scene.fog = new THREE.FogExp2(0x3d9b97, 0.08);
 
         const gltfLoader = new GLTFLoader(loadingManager);
         gltfLoader.setDRACOLoader(dracoLoader);
@@ -118,22 +115,6 @@ function init()
     {
     }
 
-    window.addEventListener('wheel', event =>
-    {
-        if (isTweaning) return;
-
-        if (event.deltaY > 0)
-        {
-            currPosition = (currPosition + 1) % 3;
-        }
-        else if (event.deltaY < 0)
-        {
-            currPosition = (((currPosition - 1) % 3) + 3) % 3;
-        }
-        isTweaning = true;
-        //tweenCamera(camera, positions[currPosition], rotations[currPosition], 1500);
-    });
-
     window.addEventListener('resize', onWindowResize);
 }
 
@@ -143,12 +124,9 @@ function update()
     const delta = clock.getDelta();
 
     if (mixer) mixer.update(delta);
-    //controls.update(delta);
-    //stats.update();
-    //TWEEN.update();
 
     //composer.render();
-    renderer.render( scene, camera );
+    renderer.render(scene, camera);
 }
 
 function onWindowResize()
@@ -160,21 +138,54 @@ function onWindowResize()
     composer.setSize(window.innerWidth, window.innerHeight);
 }
 
-/* function tweenCamera(camera, position, rotation, duration)
+function tweenCamera(camera, position, rotation)
 {
-    new TWEEN.Tween(camera.position).to({
-        x: position[0],
-        y: position[1],
-        z: position[2]
-    }, duration).easing(TWEEN.Easing.Quadratic.InOut).onComplete(() =>
-    {
-        isTweaning = false;
-    }).start();
+    gsap.to(camera.position, { x: position[0], y: position[1], z: position[2], duration: 1.5, ease: 'power3.inOut' });
+    gsap.to(camera.rotation, { x: rotation[0], y: rotation[1], z: rotation[2], duration: 1.5, ease: 'power3.inOut' });
+}
 
-    new TWEEN.Tween(camera.rotation).to({
-        x: rotation[0],
-        y: rotation[1],
-        z: rotation[2]
-    }, duration).easing(TWEEN.Easing.Quadratic.InOut).start();
-} */
+$(function ()
+{
+    $('body').show();
+
+    $(window).on('scroll', function ()
+    {
+        if (!benefitsShown)
+        {
+            if ($('.benefits').offset().top - $(window).scrollTop() < window.innerHeight / 3)
+            {
+                benefitsShown = true;
+                currentPosition = currentPosition + 1;
+                tweenCamera(camera, positions[currentPosition], rotations[currentPosition]);
+            }
+        }
+        else
+        {
+            if ($('.benefits').offset().top - $(window).scrollTop() > window.innerHeight / 3)
+            {
+                benefitsShown = false;
+                currentPosition = currentPosition - 1;
+                tweenCamera(camera, positions[currentPosition], rotations[currentPosition]);
+            }
+        }
+        if (!infoShown)
+        {
+            if ($('.info').offset().top - $(window).scrollTop() < window.innerHeight / 2)
+            {
+                infoShown = true;
+                currentPosition = currentPosition + 1;
+                tweenCamera(camera, positions[currentPosition], rotations[currentPosition]);
+            }
+        }
+        else
+        {
+            if ($('.info').offset().top - $(window).scrollTop() > window.innerHeight / 2)
+            {
+                infoShown = false;
+                currentPosition = currentPosition - 1;
+                tweenCamera(camera, positions[currentPosition], rotations[currentPosition]);
+            }
+        }
+    });
+});
 
