@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 
 $color-primary: #615eff;
+$color-primary-light: #7976ff;
 $color-secondary: #46bff1;
 $color-white: #ffffff;
 
@@ -35,7 +36,6 @@ $base-font-weight: 400;
 }
 
 body {
-    display: none;
     font-family: $base-font-family;
     font-size: $base-font-size;
     font-weight: $base-font-weight;
@@ -54,19 +54,20 @@ img {
     z-index: -1;
 }
 
-button {
-    font-family: $base-font-family;
-    cursor: pointer;
-}
-
 .btn-primary {
     color: $color-white;
     background-color: $color-primary;
     font-size: 16px;
     font-weight: 700;
+    font-family: $base-font-family;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &:hover {
-        opacity: 80%;
+        background-color: $color-primary-light;
     }
 }
 
@@ -75,9 +76,15 @@ button {
     background-color: $color-white;
     font-size: 16px;
     font-weight: 700;
+    font-family: $base-font-family;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &:hover {
-        opacity: 80%;
+        background-color: darken($color-white, 7%);
     }
 }
 
@@ -94,6 +101,12 @@ button {
         justify-content: space-between;
         align-items: center;
         height: 68px;
+    }
+
+    &__logo{
+        width: 63px;
+        height: 59px;
+        margin-top: 9px;
     }
 }
 
@@ -280,9 +293,9 @@ button {
         margin-bottom: 30px;
     }
 
-    &__content-left_container{
+    &__content-left_container {
         position: sticky;
-        top: 160px;
+        top: calc(50vh - 122px);
     }
 
     &__content-right {

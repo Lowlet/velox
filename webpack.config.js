@@ -2,15 +2,24 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 const isDev = process.env.NODE_ENV === 'development'
+const pages = ["index", "form"];
 
 module.exports = {
     context: path.resolve(__dirname, 'src'),
-    mode: 'development',
-    entry: './js/index.js',
+    entry: pages.reduce((config, page) =>
+    {
+        config[page] = `./js/${page}.js`;
+        return config;
+    }, {}),
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].[contenthash].js',
         clean: true
+    },
+    optimization: {
+        splitChunks: {
+            chunks: "all",
+        },
     },
     devtool: isDev ? 'eval-source-map' : false,
     devServer: {
@@ -19,16 +28,17 @@ module.exports = {
         hot: true
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            template: './index.html',
-            minify: {
-                collapseWhitespace: !isDev
-            }
-        }),
         new MiniCssExtractPlugin({
             filename: '[name].[contenthash].css'
         })
-    ],
+    ].concat(pages.map((page) =>
+        new HtmlWebpackPlugin({
+            inject: true,
+            template: `./${page}.html`,
+            filename: `${page}.html`,
+            chunks: [page],
+        })
+    )),
     module: {
         rules: [
             {
