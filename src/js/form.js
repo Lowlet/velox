@@ -1,5 +1,5 @@
 import * as $ from 'jquery'
-import '../scss/main.scss'
+import '../scss/form.scss'
 
 $(function ()
 {

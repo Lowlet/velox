@@ -7,6 +7,7 @@ import { SSRPass } from 'three/examples/jsm/postprocessing/SSRPass.js';
 import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader.js';
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
 import { gsap } from 'gsap'
+import * as $ from 'jquery'
 
 import mdl_bg_cubes from '../mdl/bg_cubes.glb';
 import img_background from '../img/background.exr';
@@ -96,6 +97,7 @@ function init()
 
     loadingManager.onLoad = () =>
     {
+        $('.canvas-blocker').fadeOut('slow');
     }
 
     window.addEventListener('resize', onWindowResize);
