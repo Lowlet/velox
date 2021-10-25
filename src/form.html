@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()" />
     <link rel="icon" type="image/png" href="img/favicon.png">
     <title>Velox</title>
 </head>
 
 <body style="display: none;">
-    <canvas class="canvas" id="canvas"></canvas>
     <div class="wrapper">
         <header class="header">
             <div class="container">
@@ -20,7 +19,7 @@
                     </a>
                     <nav class="header__menu">
                         <a class="header__menu-btn btn-primary" href="form.html">Request Access</a>
-                        <a class="header__menu-btn btn-secondary">Log In</a>
+                        <a class="header__menu-btn btn-secondary" href="https://velox-clearing.com/portal/login">Log In</a>
                     </nav>
                 </div>
             </div>
@@ -58,7 +57,7 @@
                     <div class="request-form__container">
                         <h4 class="call-us__title">Submit a Request</h4>
                         <form class="request-form__inner" action="">
-                            <label class="request-form__label"><span style="color: #ff0000"><pre>* </pre></span>Required</label>
+                            <label class="request-form__label required"><span style="color: #ff0000"><pre>* </pre></span>Required</label>
                             <label class="request-form__label">Full Name<span style="color: #ff0000"><pre> *</pre></span></label>
                             <input type="text">
                             <label class="request-form__label">Email Address<span style="color: #ff0000"><pre> *</pre></span></label>
@@ -290,14 +289,14 @@
                             </div>
                             <label class="request-form__label">Registered Entity<span style="color: #ff0000"><pre> *</pre></span></label>
                             <select>
-                                <option disabled selected value>Select...</option>
+                                <option disabled selected value>- Select -</option>
                                 <option value="1">Yes - FINRA and/or SEC Registered</option>
                                 <option value="2">No - In Progress</option>
                                 <option value="3">No - Not Planning To</option>
                             </select>
                             <label class="request-form__label">I am...<span style="color: #ff0000"><pre> *</pre></span></label>
                             <select>
-                                <option disabled selected value>Select...</option>
+                                <option disabled selected value>- Select -</option>
                                 <option value="1">A broker/dealer looking for a custody and clearing partner</option>
                                 <option value="2">A hedge fund manager seeking to partner with custodian</option>
                                 <option value="3">An RIA who advises clients on investments, financial planning, etc.</option>
@@ -306,7 +305,7 @@
                             </select>
                             <label class="request-form__label">How did you hear about us?</label>
                             <select>
-                                <option disabled selected value>Select...</option>
+                                <option disabled selected value>- Select -</option>
                                 <option value="1">Google Search</option>
                                 <option value="2">News/Press</option>
                                 <option value="3">Blog Posts</option>
@@ -350,10 +349,10 @@
                             </li>
                         </ul>
                         <div class="footer__menu-social">
-                            <a class="logo" href="">
+                            <a class="logo" href="https://www.facebook.com/veloxclearing">
                                 <img src="img/logo_facebook.svg" alt="">
                             </a>
-                            <a class="logo" href="">
+                            <a class="logo" href="https://www.linkedin.com/company/velox-clearing/">
                                 <img src="img/logo_linkedin.svg" alt="">
                             </a>
                         </div>

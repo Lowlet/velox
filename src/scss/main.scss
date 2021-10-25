@@ -54,7 +54,7 @@ img {
     z-index: -2;
 }
 
-.canvas-blocker{
+.canvas-blocker {
     position: fixed;
     width: 100%;
     height: 100%;
@@ -111,7 +111,7 @@ img {
         height: 68px;
     }
 
-    &__logo{
+    &__logo {
         width: 63px;
         height: 59px;
         margin-top: 9px;
@@ -151,7 +151,6 @@ img {
     &__inner {
         display: flex;
         flex-direction: column;
-        height: 290px;
         padding: 70px 0;
     }
 }
@@ -163,9 +162,15 @@ img {
 
     &-list {
         display: flex;
-        width: 670px;
-        justify-content: space-between;
-        margin-left: 130px;
+        margin-left: 50px;
+        flex-wrap: wrap;
+    }
+
+    &-item {
+        margin-left: 80px;
+        display: flex;
+        align-items: center;
+        line-height: 40px;
     }
 
     &-link {
@@ -205,31 +210,35 @@ img {
         display: flex;
         align-items: center;
         flex-direction: column;
+        justify-content: center;
         height: 100vh;
+    }
+
+    &__container {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        top: -10vh;
     }
 
     &__title {
         color: $color-white;
-        height: 72px;
         font-size: 60px;
         font-weight: 600;
         text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
-        margin: 300px 0 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        margin: 0 0 25px;
+        line-height: 60px;
+        text-align: center;
     }
 
     &__subtitle {
         color: $color-white;
-        height: 44px;
         font-size: 30px;
         font-weight: 500;
         text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
         margin-bottom: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        text-align: center;
     }
 }
 
@@ -270,7 +279,7 @@ img {
     }
 
     &__title {
-        width: 550px;
+        max-width: 550px;
         color: $color-white;
         font-size: 45px;
         font-weight: 700;
@@ -283,7 +292,7 @@ img {
     }
 
     &__subtitle {
-        width: 650px;
+        max-width: 650px;
         color: $color-white;
         font-size: 25px;
         font-weight: 500;
@@ -295,7 +304,7 @@ img {
     }
 
     &__divider {
-        width: 325px;
+        max-width: 325px;
         height: 6px;
         background: linear-gradient(90deg, $color-primary 0%, $color-secondary 50%);
         margin-bottom: 30px;
@@ -315,9 +324,9 @@ img {
 
     &-panel__container {
         @extend %frosted-panel;
-        width: 350px;
-        height: 450px;
-        padding: 40px 54px 0 54px;
+        max-width: 350px;
+        min-height: 450px;
+        padding: 40px 54px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -366,19 +375,16 @@ img {
     }
 
     &__title {
-        height: 68px;
         color: $color-white;
         font-size: 45px;
         font-weight: 600;
         margin-bottom: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        text-align: center;
         text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+        line-height: 65px;
     }
 
     &__subtitle {
-        height: 115px;
         color: $color-white;
         font-size: 25px;
         font-weight: 500;
@@ -386,6 +392,7 @@ img {
         text-align: center;
         margin-bottom: 40px;
         text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+        line-height: 35px;
     }
 
     &__benefits-container {
@@ -412,6 +419,7 @@ img {
         font-size: 23px;
         font-weight: 700;
         margin-bottom: 10px;
+        line-height: 35px;
     }
 
     &__benefits-description {
@@ -429,27 +437,137 @@ img {
     height: 100%;
 
     &__inner {
-        padding: 60px 65px 100px;
+        padding: 60px 65px;
     }
 
     &__title {
-        height: 68px;
         color: $color-white;
         font-size: 45px;
         font-weight: 600;
         text-align: center;
         margin-bottom: 60px;
+        line-height: 65px;
+}
+
+    &__logos {
         display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+
+    &__logos-item{
+        flex-grow: 1;
+        flex-basis: 150px;
+        display: flex;
+        height: 100px;
+        justify-content: center;
         align-items: center;
+    }
+}
+
+@media (max-width: 1180px) {
+    .header__inner {
+        padding: 0 20px;
+    }
+
+    .footer__inner {
+        padding: 70px 20px 70px;
+    }
+
+    .footer__menu-item {
+        margin-left: 0;
+        margin-right: 30px;
+    }
+
+    .intro__inner {
+        margin: 0 20px;
+    }
+
+    .benefits__inner {
+        margin: 0 20px;
+        padding: 0 0 195px;
+    }
+
+    .info__inner {
+        margin: 0 20px;
+        padding: 0 0 130px 0;
+    }
+
+    .partners__inner{
+        padding: 60px 20px 100px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .benefits__inner {
+        flex-direction: column;
+    }
+
+    .benefits__content-right {
+        margin-top: 70px;
+        margin-left: 0;
+    }
+
+    .benefits__title {
+        margin: 0;
+    }
+
+    .info__panel {
+        padding: 50px 20px 10px;
+    }
+}
+
+@media (max-width: 785px) {
+    .footer__menu {
+        align-items: start;
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+
+    .footer__menu-list {
+        margin-left: 0;
+    }
+
+    .footer__menu-social {
+        margin-top: 20px;
+        margin-left: 0;
+    }
+
+    .logo {
+        margin-bottom: 20px;
+    }
+
+    .info__benefits-container {
+        padding: 0;
+    }
+
+    .info__benefits-section {
+        margin-top: 50px;
+        flex-direction: column;
+    }
+
+    .info__benefits-left {
+        max-width: 40px;
+        max-height: 40px;
+        padding: 0 0 20px 0;
+    }
+}
+
+@media (max-width: 455px) {
+    .header__inner {
+        display: flex;
         justify-content: center;
     }
 
-    &__logos {
-        display: grid;
-        grid-template-columns: repeat(5, 20%);
-        grid-template-rows: repeat(3, 33.3%);
-        grid-row-gap: 1.5em;
-        justify-items: center;
-        align-items: center;
+    .header__logo {
+        display: none;
+    }
+
+    .intro__container {
+        top: auto;
+    }
+
+    .partners__logos {
+        gap: 15px;
     }
 }
