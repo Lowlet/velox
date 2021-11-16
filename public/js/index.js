@@ -45,7 +45,7 @@ function init()
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.outputEncoding = THREE.sRGBEncoding;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1;
+    renderer.toneMappingExposure = 0.5;
     renderer.physicallyCorrectLights = true;
 
     //Screen Space Reflections

@@ -89,7 +89,7 @@ textarea {
 }
 
 .title {
-    color: $color-white;
+    color: white;
     font-size: 38px;
     font-weight: 600;
     margin-top: 160px;
@@ -98,7 +98,7 @@ textarea {
 }
 
 .subtitle {
-    color: $color-white;
+    color: white;
     font-size: 17px;
     font-weight: 500;
     margin-top: 20px;
@@ -108,7 +108,7 @@ textarea {
 
 .call-us {
     &__container {
-        background-color: $color-white;
+        background-color: white;
         padding: 30px 60px 30px;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
         border-radius: 5px;
@@ -211,7 +211,7 @@ textarea {
 
 .request-form {
     &__container {
-        background-color: $color-white;
+        background-color: white;
         padding: 30px 60px 30px;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
         border-radius: 5px;
