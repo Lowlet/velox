@@ -13,13 +13,13 @@ let canvas, clock, scene, camera, renderer, mixer, composer, ssr, fxaa, stats;
 const selects = [];
 
 const positions = [
-    [3.2, 11.5, 10.6],
     [-29, 10.2, 9.3],
+    [3.2, 11.5, 10.6],
     [-10.9, 5.6, -10.4]
 ];
 const rotations = [
-    [-1.5, 0, 1],
     [-1, -0.7, -0.8],
+    [-1.5, 0, 1],
     [-2.6, -0.4, -2.9]
 ];
 let currentPosition = 0;
@@ -38,14 +38,14 @@ function init()
     scene = new THREE.Scene();
 
     camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 100);
-    camera.position.set(3.2, 11.5, 10.6);
-    camera.rotation.set(-1.5, 0, 1);
+    camera.position.set(-29, 10.2, 9.3);
+    camera.rotation.set(-1, -0.7, -0.8);
 
     renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.outputEncoding = THREE.sRGBEncoding;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 0.6;
+    renderer.toneMappingExposure = 1;
     renderer.physicallyCorrectLights = true;
 
     //Screen Space Reflections
@@ -72,9 +72,9 @@ function init()
     {
         texture.mapping = THREE.EquirectangularReflectionMapping;
 
-        scene.background = new THREE.Color(0x2e5294);
+        scene.background = new THREE.Color(0x0548b5);
         scene.environment = texture;
-        scene.fog = new THREE.FogExp2(0x2e5294, 0.08);
+        scene.fog = new THREE.FogExp2(0x0548b5, 0.06);
 
         const gltfLoader = new GLTFLoader(loadingManager);
         gltfLoader.setMeshoptDecoder(MeshoptDecoder);
