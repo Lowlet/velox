@@ -43,9 +43,10 @@ function init()
 
     renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.outputEncoding = THREE.sRGBEncoding;
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 0.5;
+    //renderer.outputEncoding = THREE.sRGBEncoding;
+    renderer.outputEncoding = THREE.LinearEncoding;
+    //renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1;
     renderer.physicallyCorrectLights = true;
 
     //Screen Space Reflections
@@ -135,6 +136,51 @@ function tweenCamera(position, rotation)
     gsap.to(camera.position, { x: position[0], y: position[1], z: position[2], duration: 1.5, ease: 'power3.inOut' });
     gsap.to(camera.rotation, { x: rotation[0], y: rotation[1], z: rotation[2], duration: 1.5, ease: 'power3.inOut' });
 }
+
+const pos = { x: 0, y: 0 };
+
+const saveCursorPosition = function (x, y)
+{
+    pos.x = (x / window.innerWidth).toFixed(2);
+    pos.y = (y / window.innerHeight).toFixed(2);
+    document.documentElement.style.setProperty('--x', pos.x);
+    document.documentElement.style.setProperty('--y', pos.y);
+}
+
+setInterval(function ()
+{
+    var tempscroll = $(window).scrollTop();
+    setTimeout(function ()
+    {
+        if (tempscroll == $(window).scrollTop())
+        {
+            $('.benefits__cube-01').addClass('pause-anim');
+            $('.benefits__cube-02').addClass('pause-anim');
+            $('.benefits__cube-03').addClass('pause-anim');
+            $('.benefits__cube-04').addClass('pause-anim');
+            $('.benefits__cube-05').addClass('pause-anim');
+            $('.benefits__cube-06').addClass('pause-anim');
+            $('.benefits__cube-07').addClass('pause-anim');
+            $('.benefits__cube-08').addClass('pause-anim');
+            $('.benefits__cube-09').addClass('pause-anim');
+        }
+        else
+        {
+            $('.benefits__cube-01').removeClass('pause-anim');
+            $('.benefits__cube-02').removeClass('pause-anim');
+            $('.benefits__cube-03').removeClass('pause-anim');
+            $('.benefits__cube-04').removeClass('pause-anim');
+            $('.benefits__cube-05').removeClass('pause-anim');
+            $('.benefits__cube-06').removeClass('pause-anim');
+            $('.benefits__cube-07').removeClass('pause-anim');
+            $('.benefits__cube-08').removeClass('pause-anim');
+            $('.benefits__cube-09').removeClass('pause-anim');
+        }
+    }, 75);
+
+}, 100);
+
+document.addEventListener('mousemove', e => { saveCursorPosition(e.clientX, e.clientY); })
 
 $(function ()
 {
