@@ -143,7 +143,7 @@ const saveCursorPosition = function (x, y)
 {
     pos.x = (x / window.innerWidth).toFixed(2);
     pos.y = (y / window.innerHeight).toFixed(2);
-    document.documentElement.style.setProperty('--x', pos.x);
+    document.documentElement.style.setProperty('--x', -pos.x);
     document.documentElement.style.setProperty('--y', pos.y);
 }
 
@@ -186,6 +186,9 @@ $(function ()
 {
     $('body').show();
 
+    $('.intro__title').addClass('intro__title-anim');
+    $('.intro__subtitle').addClass('intro__subtitle-anim');
+
     $('#header__btn-menu').on('click', () =>
     {
         $('.header-menu').addClass('header-menu--open')
@@ -200,6 +203,12 @@ $(function ()
 
     $(window).on('scroll', () =>
     {
+        if ($('.benefits').offset().top - $(window).scrollTop() < window.innerHeight / 2)
+        {
+            $('.benefits__title').addClass('benefits__title-anim');
+            $('.benefits__subtitle').addClass('benefits__subtitle-anim');
+        }
+
         if (!benefitsShown)
         {
             if ($('.benefits').offset().top - $(window).scrollTop() < window.innerHeight / 3)
