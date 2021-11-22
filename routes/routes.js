@@ -18,6 +18,7 @@ router.get('/', (req, res) =>
 router.get('/form', (req, res) =>
 {
     res.render('form', {
+        layout: 'form.hbs',
         title: 'Request Access',
         styles: ['/styles/form.css'],
         scripts: ['/public/js/form.js']
@@ -70,8 +71,8 @@ router.post('/submit',
             const mailOptions =
             {
                 from: 'veloxformmailer@gmail.com',
-                //to: 'maximko1993@gmail.com',
-                to: 'sales@velox-global.com',
+                to: 'maximko1993@gmail.com',
+                //to: 'sales@velox-global.com',
                 subject: 'New Access Request',
                 html: `
                 <ul>
@@ -86,13 +87,13 @@ router.post('/submit',
             }
 
             const transport = nodemailer.createTransport({
-                name: 'smtp.gmail.com',
-                host: 'smtp.gmail.com',
-                port: 465,
-                secure: true,
+                service: 'gmail',
                 auth: {
-                    user: 'veloxformmailer@gmail.com',
-                    pass: 'veloxmailer2021'
+                  type: 'OAuth2',
+                  user: 'veloxformmailer@gmail.com',
+                  clientId: '304491380074-4ljefs4rlktn3icf4nh9qqtbmgvu2ghd.apps.googleusercontent.com',
+                  clientSecret: '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',
+                  refreshToken: '1//04nWSstUR6X6QCgYIARAAGAQSNwF-L9Ir4XNabnQW82H3ay4dv0P8iFygOfxFDnSyrm3lmrhiTXEiMlkPRcgEM6vP_HdQhCXp-0c'
                 }
             });
 
@@ -106,6 +107,7 @@ router.post('/submit',
         }
 
         res.render('form', {
+            layout: 'form.hbs',
             title: 'Request Access',
             form: form,
             error: error,

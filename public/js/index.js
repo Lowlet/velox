@@ -88,7 +88,7 @@ function init()
             gltf.animations.forEach((clip) =>
             {
                 const action = mixer.clipAction(clip);
-                action.setDuration(30);
+                action.setDuration(20);
                 action.setLoop(THREE.LoopRepeat);
                 action.play();
             });
@@ -147,10 +147,10 @@ const saveCursorPosition = function (x, y)
     document.documentElement.style.setProperty('--y', pos.y);
 }
 
-setInterval(function ()
+setInterval(() =>
 {
     var tempscroll = $(window).scrollTop();
-    setTimeout(function ()
+    setTimeout(() =>
     {
         if (tempscroll == $(window).scrollTop())
         {

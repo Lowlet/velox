@@ -1,0 +1,12 @@
+{{> head}}
+
+<body style="display: none;">
+    {{#if isIndex}}
+    <canvas class="canvas" id="canvas"></canvas>
+    <div class="canvas-blocker"></div>
+    {{/if}}
+    <div class="wrapper">
+        {{> header}}
+        {{{ body }}}
+    </div>
+</body>
