@@ -1,5 +1,6 @@
 @import "reset.scss";
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap");
 
 $color-primary: #615eff;
 $color-primary-light: #7976ff;
@@ -355,13 +356,16 @@ img {
     &__title {
         color: white;
         opacity: 0;
-        font-size: 53px;
-        font-weight: 600;
-        margin: 0 0 25px;
-        line-height: 60px;
+        font-family: "Lexend Deca", sans-serif;
+        font-size: 70px;
+        font-weight: normal;
+        margin: 0 0 20px;
+        line-height: 85px;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
         text-align: center;
         transform: translateY(20px);
-        transition: all 500ms ease-out 0.5s;
+        transition: transform 500ms ease-out 0.5s, opacity 500ms ease-out 0.5s;
 
         &-anim {
             transform: translateY(0px);
@@ -372,13 +376,13 @@ img {
     &__subtitle {
         color: white;
         opacity: 0;
-        font-size: 30px;
+        font-size: 25px;
         font-weight: 500;
         margin-bottom: 40px;
         text-align: center;
-        line-height: 44px;
+        line-height: 37px;
         transform: translateY(20px);
-        transition: all 500ms ease-out 0.8s;
+        transition: transform 500ms ease-out 0.8s, opacity 500ms ease-out 0.8s;
 
         &-anim {
             transform: translateY(0px);
@@ -437,13 +441,33 @@ img {
 }
 
 .benefits {
-    background: white;
+    background: #f2f4f5;;
     position: relative;
     overflow-y: visible;
 
+    &__bg-container{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 180%;
+        height: 100%;
+    }
+
+    &__bg {
+        position: sticky;
+        left: 0;
+        top: 65px;
+        z-index: -1;
+        width: 100%;
+        height: 100vh;
+        mix-blend-mode: color-dodge;
+        object-fit: cover;
+        object-position: 0% 100%;
+    }
+
     &__inner {
         display: flex;
-        padding: 170px 0 140px;
+        min-height: 100vh;
     }
 
     &__title {
@@ -451,11 +475,11 @@ img {
         color: #242424;
         opacity: 0;
         font-size: 45px;
-        font-weight: 700;
+        font-weight: 600;
         line-height: 67px;
         margin: 90px 0 36px;
         transform: translateX(20px);
-        transition: all 500ms ease-out;
+        transition: transform 500ms ease-out, opacity 500ms ease-out;
 
         &-anim {
             transform: translateX(0px);
@@ -478,7 +502,7 @@ img {
         font-weight: 500;
         line-height: 37px;
         transform: translateX(20px);
-        transition: all 500ms ease-out 0.3s;
+        transition: transform 500ms ease-out 0.3s, opacity 500ms ease-out 0.3s;
 
         &-anim {
             transform: translateX(0px);
@@ -491,21 +515,30 @@ img {
         top: calc(50vh - 122px);
     }
 
+    &__content-left {
+        width: 100%;
+        padding: 150px 0;
+    }
+
     &__content-right {
+        height: 2400px;
+        position: relative;
+        width: 80%;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-end;
         margin-left: auto;
         z-index: 2;
     }
 
     &-panel__container {
+        position: sticky;
         background: white;
         border-radius: 10px;
         box-shadow: 0px 4px 8px 3px rgba(94, 94, 94, 0.12);
         max-width: 350px;
         min-height: 400px;
-        padding: 40px 54px;
+        padding: 40px 45px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -535,70 +568,15 @@ img {
     &-panel__description {
         color: #242424;
         font-weight: 400;
-        font-size: 20px;
-        line-height: 28px;
+        font-size: 18px;
+        line-height: 27px;
         text-align: center;
-    }
-
-    &-panel__line {
-        border: 1px solid #bbbbbb;
-        height: 128px;
-    }
-
-    &__cubes {
-        position: absolute;
-        top: -150px;
-        width: 100%;
-        height: 100%;
-    }
-
-    &__cubes-inner {
-        position: sticky;
-        top: -150px;
-        height: 740px;
-        transform: translate(calc(50px * var(--x)), 0);
-    }
-
-    &__cube-01 {
-        animation: cube-01 2s infinite alternate linear;
-    }
-
-    &__cube-02 {
-        animation: cube-02 4s infinite alternate linear;
-    }
-
-    &__cube-03 {
-        animation: cube-03 2s infinite alternate linear;
-    }
-
-    &__cube-04 {
-        animation: cube-04 3s infinite alternate linear;
-    }
-
-    &__cube-05 {
-        animation: cube-05 4s infinite alternate linear;
-    }
-
-    &__cube-06 {
-        animation: cube-06 2s infinite alternate linear;
-    }
-
-    &__cube-07 {
-        animation: cube-07 3s infinite alternate linear;
-    }
-
-    &__cube-08 {
-        animation: cube-08 4s infinite alternate linear;
-    }
-
-    &__cube-09 {
-        animation: cube-09 2s infinite alternate linear;
     }
 }
 
 .info {
     position: relative;
-    background: #f2f4f5;
+    background: white;
     z-index: 0;
 
     &__inner {
@@ -612,13 +590,6 @@ img {
         margin-bottom: 20px;
         text-align: center;
         line-height: 65px;
-
-        &-hl {
-            background: linear-gradient(90deg, #615eff 0%, #45c3f0 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
     }
 
     &__subtitle {

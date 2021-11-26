@@ -45,7 +45,7 @@ function init()
     renderer.setSize(window.innerWidth, window.innerHeight);
     //renderer.outputEncoding = THREE.sRGBEncoding;
     renderer.outputEncoding = THREE.LinearEncoding;
-    //renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1;
     renderer.physicallyCorrectLights = true;
 
