@@ -7,6 +7,7 @@ import { SSRPass } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/post
 import { FXAAShader } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/shaders/FXAAShader.js';
 import { ShaderPass } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/postprocessing/ShaderPass.js';
 import gsap from 'https://cdn.skypack.dev/gsap@3.8.0';
+import { ScrollTrigger } from 'https://cdn.skypack.dev/gsap@3.8.0/ScrollTrigger';
 import $ from 'https://cdn.skypack.dev/jquery@3.6.0';
 
 let canvas, clock, scene, camera, renderer, mixer, composer, ssr, fxaa, stats;
@@ -137,54 +138,19 @@ function tweenCamera(position, rotation)
     gsap.to(camera.rotation, { x: rotation[0], y: rotation[1], z: rotation[2], duration: 1.5, ease: 'power3.inOut' });
 }
 
-const pos = { x: 0, y: 0 };
+gsap.registerPlugin(ScrollTrigger);
 
-const saveCursorPosition = function (x, y)
-{
-    pos.x = (x / window.innerWidth).toFixed(2);
-    pos.y = (y / window.innerHeight).toFixed(2);
-    document.documentElement.style.setProperty('--x', -pos.x);
-    document.documentElement.style.setProperty('--y', pos.y);
-}
-
-setInterval(() =>
-{
-    var tempscroll = $(window).scrollTop();
-    setTimeout(() =>
-    {
-        if (tempscroll == $(window).scrollTop())
-        {
-            $('.benefits__cube-01').addClass('pause-anim');
-            $('.benefits__cube-02').addClass('pause-anim');
-            $('.benefits__cube-03').addClass('pause-anim');
-            $('.benefits__cube-04').addClass('pause-anim');
-            $('.benefits__cube-05').addClass('pause-anim');
-            $('.benefits__cube-06').addClass('pause-anim');
-            $('.benefits__cube-07').addClass('pause-anim');
-            $('.benefits__cube-08').addClass('pause-anim');
-            $('.benefits__cube-09').addClass('pause-anim');
-        }
-        else
-        {
-            $('.benefits__cube-01').removeClass('pause-anim');
-            $('.benefits__cube-02').removeClass('pause-anim');
-            $('.benefits__cube-03').removeClass('pause-anim');
-            $('.benefits__cube-04').removeClass('pause-anim');
-            $('.benefits__cube-05').removeClass('pause-anim');
-            $('.benefits__cube-06').removeClass('pause-anim');
-            $('.benefits__cube-07').removeClass('pause-anim');
-            $('.benefits__cube-08').removeClass('pause-anim');
-            $('.benefits__cube-09').removeClass('pause-anim');
-        }
-    }, 75);
-
-}, 100);
-
-document.addEventListener('mousemove', e => { saveCursorPosition(e.clientX, e.clientY); })
+gsap.to('.benefits__bg-fill, .benefits__mask', {
+    scrollTrigger: { trigger: '.benefits__content-right', scrub: true, start: 'top top', end: 'bottom bottom'},
+    backgroundColor: '#4737BE'
+});
 
 $(function ()
 {
+    $('html, body').scrollTop($('.main').offset().top);
     $('body').show();
+
+    ScrollTrigger.refresh();
 
     $('.intro__title').addClass('intro__title-anim');
     $('.intro__subtitle').addClass('intro__subtitle-anim');

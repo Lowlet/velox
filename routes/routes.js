@@ -101,6 +101,7 @@ router.post('/submit',
             {
                 if (error)
                 {
+                    res.json({ error: 'Error sending form' });
                     console.log(error.message);
                 }
             })
