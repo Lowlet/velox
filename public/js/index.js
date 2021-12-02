@@ -140,7 +140,11 @@ function tweenCamera(position, rotation)
 
 gsap.registerPlugin(ScrollTrigger);
 
-gsap.to('.benefits__bg-fill, .benefits__mask', {
+gsap.fromTo('.benefits__bg-fill, .benefits__mask',
+{
+   backgroundColor: '#62b9ff' 
+},
+{
     scrollTrigger: { trigger: '.benefits__content-right', scrub: true, start: 'top top', end: 'bottom bottom'},
     backgroundColor: '#4737BE'
 });

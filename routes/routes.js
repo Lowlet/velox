@@ -89,11 +89,11 @@ router.post('/submit',
             const transport = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
-                  type: 'OAuth2',
-                  user: 'veloxformmailer@gmail.com',
-                  clientId: '304491380074-4ljefs4rlktn3icf4nh9qqtbmgvu2ghd.apps.googleusercontent.com',
-                  clientSecret: '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',
-                  refreshToken: '1//04nWSstUR6X6QCgYIARAAGAQSNwF-L9Ir4XNabnQW82H3ay4dv0P8iFygOfxFDnSyrm3lmrhiTXEiMlkPRcgEM6vP_HdQhCXp-0c'
+                    type: 'OAuth2',
+                    user: 'veloxformmailer@gmail.com',
+                    clientId: '304491380074-4ljefs4rlktn3icf4nh9qqtbmgvu2ghd.apps.googleusercontent.com',
+                    clientSecret: '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',
+                    refreshToken: '1//04Oc_ae7byj80CgYIARAAGAQSNwF-L9Ir7BFPVRIoUjTBeBKnLlaQX4AJbDYLDxjaoHtB0sH_pMsSDd-oSnzxGihcnnQadsa0L3A'
                 }
             });
 
@@ -101,7 +101,6 @@ router.post('/submit',
             {
                 if (error)
                 {
-                    res.json({ error: 'Error sending form' });
                     console.log(error.message);
                 }
             })
