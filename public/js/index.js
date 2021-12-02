@@ -14,13 +14,13 @@ let canvas, clock, scene, camera, renderer, mixer, composer, ssr, fxaa, stats;
 const selects = [];
 
 const positions = [
-    [-29, 10.2, 9.3],
     [3.2, 11.5, 10.6],
+    [-29, 10.2, 9.3],
     [-10.9, 5.6, -10.4]
 ];
 const rotations = [
-    [-1, -0.7, -0.8],
     [-1.5, 0, 1],
+    [-1, -0.7, -0.8],
     [-2.6, -0.4, -2.9]
 ];
 let currentPosition = 0;
@@ -39,8 +39,8 @@ function init()
     scene = new THREE.Scene();
 
     camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 100);
-    camera.position.set(-29, 10.2, 9.3);
-    camera.rotation.set(-1, -0.7, -0.8);
+    camera.position.set(3.2, 11.5, 10.6);
+    camera.rotation.set(-1.5, 0, 1);
 
     renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -179,7 +179,7 @@ $(function ()
             $('.benefits__subtitle').addClass('benefits__subtitle-anim');
         }
 
-        if (!benefitsShown)
+/*         if (!benefitsShown)
         {
             if ($('.benefits').offset().top - $(window).scrollTop() < window.innerHeight / 3)
             {
@@ -214,7 +214,7 @@ $(function ()
                 currentPosition = currentPosition - 1;
                 tweenCamera(positions[currentPosition], rotations[currentPosition]);
             }
-        }
+        } */
     });
 });
 
