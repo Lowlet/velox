@@ -478,7 +478,7 @@ img {
         top: 65px;
         left: 0;
         background-color: #62b9ff;
-        -webkit-mask-image: linear-gradient(to bottom, transparent 77%, white 80%);
+        -webkit-mask-image: linear-gradient(to top, white calc((100vh - 465px) / 2.6), transparent calc((100vh - 465px) / 2.4));
         z-index: 1;
     }
 
@@ -683,7 +683,6 @@ img {
     &__benefits-container {
         //padding: 0 40px;
         position: relative;
-        margin-bottom: 60px;
     }
 
     &__img-1 {
@@ -698,11 +697,6 @@ img {
         height: auto;
         bottom: 0;
         right: 0;
-    }
-
-    &__button-container {
-        display: flex;
-        justify-content: center;
     }
 }
 

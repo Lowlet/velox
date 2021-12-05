@@ -10,7 +10,8 @@ router.get('/', (req, res) =>
     res.render('index', {
         title: 'Velox',
         isIndex: true,
-        styles: ['/styles/main.css'],
+        scroll: false,
+        styles: ['/styles/main.css', '/styles/form.css'],
         scripts: ['/public/js/index.js']
     });
 });
@@ -25,7 +26,7 @@ router.get('/form', (req, res) =>
     });
 });
 
-router.post('/submit',
+router.post('/',
     body('name').not().isEmpty().withMessage('Required'),
     body('email').normalizeEmail().isEmail().withMessage('Email is not valid').not().isEmpty().withMessage('Required'),
     body('phone').not().isEmpty().withMessage('Required'),
@@ -57,6 +58,21 @@ router.post('/submit',
             if (errors.array().some(e => e.param === 'phone')) invalidPhone = true; else invalidPhone = false;
             if (errors.array().some(e => e.param === 'entity')) invalidEntity = true; else invalidEntity = false;
             if (errors.array().some(e => e.param === 'user')) invalidUser = true; else invalidUser = false;
+
+            res.render('index', {
+                title: 'Velox',
+                isIndex: true,
+                form: form,
+                error: error,
+                invalidName: invalidName,
+                invalidEmail: invalidEmail,
+                invalidPhone: invalidPhone,
+                invalidEntity: invalidEntity,
+                invalidUser: invalidUser,
+                scroll: true,
+                styles: ['/styles/main.css', '/styles/form.css'],
+                scripts: ['/public/js/index.js'],
+            });
         }
         else
         {
@@ -91,6 +107,7 @@ router.post('/submit',
                 auth: {
                     type: 'OAuth2',
                     user: 'veloxformmailer@gmail.com',
+                    //pass: 'veloxmailer2021VeLoX'
                     clientId: '304491380074-4ljefs4rlktn3icf4nh9qqtbmgvu2ghd.apps.googleusercontent.com',
                     clientSecret: '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',
                     refreshToken: '1//04Oc_ae7byj80CgYIARAAGAQSNwF-L9Ir7BFPVRIoUjTBeBKnLlaQX4AJbDYLDxjaoHtB0sH_pMsSDd-oSnzxGihcnnQadsa0L3A'
@@ -104,22 +121,14 @@ router.post('/submit',
                     console.log(error.message);
                 }
             })
-        }
 
-        res.render('form', {
-            layout: 'form.hbs',
-            title: 'Request Access',
-            form: form,
-            error: error,
-            success: success,
-            invalidName: invalidName,
-            invalidEmail: invalidEmail,
-            invalidPhone: invalidPhone,
-            invalidEntity: invalidEntity,
-            invalidUser: invalidUser,
-            styles: ['/styles/form.css'],
-            scripts: ['/public/js/form.js']
-        });
+            res.render('form', {
+                layout: 'form.hbs',
+                title: 'Request Access',
+                styles: ['/styles/form.css'],
+                scripts: ['/public/js/form.js']
+            });
+        }
     });
 
 

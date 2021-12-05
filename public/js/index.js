@@ -25,7 +25,6 @@ const rotations = [
 ];
 let currentPosition = 0;
 let benefitsShown;
-let infoShown;
 
 init();
 update();
@@ -138,16 +137,38 @@ function tweenCamera(position, rotation)
     gsap.to(camera.rotation, { x: rotation[0], y: rotation[1], z: rotation[2], duration: 1.5, ease: 'power3.inOut' });
 }
 
+//smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor =>
+{
+    anchor.addEventListener('click', function (e)
+    {
+        e.preventDefault();
+
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+
 gsap.registerPlugin(ScrollTrigger);
 
-gsap.fromTo('.benefits__bg-fill, .benefits__mask',
-{
-   backgroundColor: '#62b9ff' 
-},
-{
-    scrollTrigger: { trigger: '.benefits__content-right', scrub: true, start: 'top top', end: 'bottom bottom'},
-    backgroundColor: '#4737BE'
-});
+/* gsap.fromTo('.benefits__bg-fill, .benefits__mask',
+    {
+        backgroundColor: '#62b9ff'
+    },
+    {
+        scrollTrigger: { trigger: '.benefits__content-right', scrub: true, start: 'top top', end: 'bottom bottom' },
+        backgroundColor: '#4737BE'
+    }
+); */
+
+var timeline = gsap.timeline({ scrollTrigger: { trigger: '.benefits__content-right', scrub: true, start: 'top top', end: 'bottom bottom' } });
+
+timeline
+    .from('.benefits__bg-fill, .benefits__mask', { backgroundColor: '#62b9ff' })
+    .to('.benefits__bg-fill, .benefits__mask', { backgroundColor: '#4737BE', ease: "none" })
+    .to('.benefits__bg-fill, .benefits__mask', { backgroundColor: '#EA394E', ease: "none" })
+    .to('.benefits__bg-fill, .benefits__mask', { backgroundColor: '#F88262', ease: "none" })
 
 $(function ()
 {
@@ -179,9 +200,9 @@ $(function ()
             $('.benefits__subtitle').addClass('benefits__subtitle-anim');
         }
 
-/*         if (!benefitsShown)
+        if (!benefitsShown)
         {
-            if ($('.benefits').offset().top - $(window).scrollTop() < window.innerHeight / 3)
+            if ($('.benefits').offset().top - $(window).scrollTop() < 1 - window.innerHeight)
             {
                 benefitsShown = true;
                 currentPosition = currentPosition + 1;
@@ -190,31 +211,13 @@ $(function ()
         }
         else
         {
-            if ($('.benefits').offset().top - $(window).scrollTop() > window.innerHeight / 3)
+            if ($('.benefits').offset().top - $(window).scrollTop() > 1 - window.innerHeight)
             {
                 benefitsShown = false;
                 currentPosition = currentPosition - 1;
                 tweenCamera(positions[currentPosition], rotations[currentPosition]);
             }
         }
-        if (!infoShown)
-        {
-            if ($('.info').offset().top - $(window).scrollTop() < window.innerHeight / 2)
-            {
-                infoShown = true;
-                currentPosition = currentPosition + 1;
-                tweenCamera(positions[currentPosition], rotations[currentPosition]);
-            }
-        }
-        else
-        {
-            if ($('.info').offset().top - $(window).scrollTop() > window.innerHeight / 2)
-            {
-                infoShown = false;
-                currentPosition = currentPosition - 1;
-                tweenCamera(positions[currentPosition], rotations[currentPosition]);
-            }
-        } */
     });
 });
 
