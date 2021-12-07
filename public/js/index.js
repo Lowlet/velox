@@ -155,11 +155,11 @@ gsap.registerPlugin(ScrollTrigger);
 var timeline = gsap.timeline({ scrollTrigger: { trigger: '.benefits__content-right', scrub: true, start: 'top top', end: 'bottom bottom' } });
 
 timeline
-    .from('.benefits__bg-fill, .benefits__mask', { backgroundColor: '#62b9ff' })
-    .to('.benefits__bg-fill, .benefits__mask', { backgroundColor: '#2B303A', ease: "none" })
-    .to('.benefits__bg-fill, .benefits__mask', { backgroundColor: '#4737BE', ease: "none" })
+    .from('.benefits__bg-fill, .benefits__mask', { backgroundColor: '#2545A7' })
+    .to('.benefits__bg-fill, .benefits__mask', { backgroundColor: '#FFAD33', ease: "none" })
+    .to('.benefits__bg-fill, .benefits__mask', { backgroundColor: '#61A869', ease: "none" })
     .to('.benefits__bg-fill, .benefits__mask', { backgroundColor: '#EA394E', ease: "none" })
-    .to('.benefits__bg-fill, .benefits__mask', { backgroundColor: '#F88262', ease: "none" })
+    .to('.benefits__bg-fill, .benefits__mask', { backgroundColor: '#93BAF0', ease: "none" })
 
 $(function ()
 {
