@@ -85,22 +85,6 @@ textarea {
     padding: 100px 0;
 }
 
-.background {
-    position: absolute;
-    width: 100%;
-    height: 62%;
-    z-index: -1;
-    top: 38%;
-
-    &__inner{
-        background: white;
-        position: sticky;
-        height: 40%;
-        width: 100%;
-        top: 60%;
-    }
-}
-
 .title {
     color: white;
     font-size: 38px;
