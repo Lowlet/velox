@@ -75,6 +75,14 @@ textarea {
     border-bottom-right-radius: 5px;
 }
 
+.background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(255deg, #4baef3 3%, #615eff 97%);
+}
+
 .form {
     position: relative;
 }
@@ -154,7 +162,7 @@ textarea {
         margin-top: 10px;
     }
 
-    &__checkmark-icon{
+    &__checkmark-icon {
         display: flex;
         justify-content: center;
         margin-bottom: 15px;

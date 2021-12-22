@@ -45,7 +45,7 @@ function init()
     renderer.setSize(window.innerWidth, window.innerHeight);
     //renderer.outputEncoding = THREE.sRGBEncoding;
     renderer.outputEncoding = THREE.LinearEncoding;
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMapping = THREE.CineonToneMapping;
     renderer.toneMappingExposure = 1;
     renderer.physicallyCorrectLights = true;
 
@@ -73,9 +73,9 @@ function init()
     {
         texture.mapping = THREE.EquirectangularReflectionMapping;
 
-        scene.background = new THREE.Color(0x0548b5);
+        scene.background = new THREE.Color(0x5836bf);
         scene.environment = texture;
-        scene.fog = new THREE.FogExp2(0x0548b5, 0.06);
+        scene.fog = new THREE.FogExp2(0x5836bf, 0.06);
 
         const gltfLoader = new GLTFLoader(loadingManager);
         gltfLoader.setMeshoptDecoder(MeshoptDecoder);
@@ -88,7 +88,7 @@ function init()
             gltf.animations.forEach((clip) =>
             {
                 const action = mixer.clipAction(clip);
-                action.setDuration(20);
+                action.setDuration(30);
                 action.setLoop(THREE.LoopRepeat);
                 action.play();
             });
@@ -98,6 +98,8 @@ function init()
                 if (child.isMesh)
                 {
                     selects.push(child);
+                    child.material.metalness = 0.5;
+                    child.material.roughness = 0.5;
                 }
             });
         });
@@ -156,10 +158,16 @@ var timeline = gsap.timeline({ scrollTrigger: { trigger: '.benefits__content-rig
 
 timeline
     .from('.benefits__bg-fill, .benefits__mask', { backgroundColor: '#FFAD33' })
-    .to('.benefits__bg-fill, .benefits__mask', { backgroundColor: '#007A58', ease: "none" })
+    .to('.benefits__bg-fill, .benefits__mask', { backgroundColor: '#F57341', ease: "none" })
     .to('.benefits__bg-fill, .benefits__mask', { backgroundColor: '#EA394E', ease: "none" })
-    .to('.benefits__bg-fill, .benefits__mask', { backgroundColor: '#93BAF0', ease: "none" })
-    .to('.benefits__bg-fill, .benefits__mask', { backgroundColor: '#A409C3', ease: "none" })
+    .to('.benefits__bg-fill, .benefits__mask', { backgroundColor: '#A64CA7', ease: "none" })
+    .to('.benefits__bg-fill, .benefits__mask', { backgroundColor: '#615EFF', ease: "none" })
+    .to('.benefits__bg-fill, .benefits__mask', { backgroundColor: '#316CAC', ease: "none" })
+    .to('.benefits__bg-fill, .benefits__mask', { backgroundColor: '#007A58', ease: "none" })
+    .to('.benefits__bg-fill, .benefits__mask', { backgroundColor: '#165549', ease: "none" })
+    .to('.benefits__bg-fill, .benefits__mask', { backgroundColor: '#2B303A', ease: "none" })
+
+gsap.to('.info__img-2', { scrollTrigger: { trigger: '.info', scrub: true, start: 'top top', end: 'bottom top' }, y: '-30vw' });
 
 $(function ()
 {

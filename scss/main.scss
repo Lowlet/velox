@@ -444,7 +444,7 @@ img {
 
     &__bg-fill {
         position: absolute;
-        background-color: #62b9ff;
+        background-color: #FFAD33;
         width: 1000%;
         height: 100%;
         z-index: -1;
@@ -477,41 +477,42 @@ img {
         position: sticky;
         top: 65px;
         left: 0;
-        background-color: #62b9ff;
+        background-color: #FFAD33;
+        mask-image: linear-gradient(to top, white calc((100vh - 465px) / 2.6), transparent calc((100vh - 465px) / 2.4));
         -webkit-mask-image: linear-gradient(to top, white calc((100vh - 465px) / 2.6), transparent calc((100vh - 465px) / 2.4));
         z-index: 1;
     }
 
     &__1 {
         position: absolute;
-        height: 4800px;
+        height: 5500px;
         top: calc((100vh - 465px) / 2);
     }
 
     &__2 {
         position: absolute;
-        height: 4800px;
+        height: 5500px;
         top: calc((100vh - 465px) / 2 + 10px);
         margin-right: 10px;
     }
 
     &__3 {
         position: absolute;
-        height: 4800px;
+        height: 5500px;
         top: calc((100vh - 465px) / 2 + 20px);
         margin-right: 20px;
     }
 
     &__4 {
         position: absolute;
-        height: 4800px;
+        height: 5500px;
         top: calc((100vh - 465px) / 2 + 30px);
         margin-right: 30px;
     }
 
     &__5 {
         position: absolute;
-        height: 4800px;
+        height: 5500px;
         top: calc((100vh - 465px) / 2 + 40px);
         margin-right: 40px;
     }
@@ -573,7 +574,7 @@ img {
 
     &__content-right {
         //height: 2340px;
-        height: calc(100vh - 435px + 4800px);
+        height: calc(100vh - 435px + 5500px);
         position: relative;
         width: 80%;
         display: flex;
@@ -776,6 +777,15 @@ img {
         margin-right: 30px;
     }
 
+    .footer2__inner {
+        padding: 70px 20px 70px;
+    }
+
+    .footer2__menu-item {
+        margin-left: 0;
+        margin-right: 30px;
+    }
+
     .intro__inner {
         margin: 0 20px;
     }
@@ -827,6 +837,21 @@ img {
     }
 
     .footer__menu-social {
+        margin-top: 20px;
+        margin-left: 0;
+    }
+
+    .footer2__menu {
+        align-items: start;
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+
+    .footer2__menu-list {
+        margin-left: 0;
+    }
+
+    .footer2__menu-social {
         margin-top: 20px;
         margin-left: 0;
     }
