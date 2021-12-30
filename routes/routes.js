@@ -87,8 +87,8 @@ router.post('/',
             const mailOptions =
             {
                 from: 'veloxformmailer@gmail.com',
-                to: 'maximko1993@gmail.com',
-                //to: 'sales@velox-global.com',
+                //to: 'maximko1993@gmail.com',
+                to: 'sales@velox-global.com',
                 subject: 'New Access Request',
                 html: `
                 <ul>
